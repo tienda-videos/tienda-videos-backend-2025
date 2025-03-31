@@ -1,5 +1,9 @@
 Practices used in the project
 
+General
+1. Implementation of logs
+2. Hide credentials of application.properties
+
 DTO Implementation
 1. Use Lombok to Reduce Boilerplate Code
 2. Apply Bean Validation Annotations
