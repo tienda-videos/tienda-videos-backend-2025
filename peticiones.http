@@ -1,0 +1,37 @@
+### Variables
+@baseUrl = http://localhost:8082/v1.0/countries
+@contentType = application/json
+
+### 1. Obtener todos los países (paginado)
+GET {{baseUrl}}?page=0&size=10
+Accept: {{contentType}}
+
+### 2. Buscar países por nombre
+GET {{baseUrl}}?name=sh
+Accept: {{contentType}}
+
+### 3. Obtener un país por ID
+GET {{baseUrl}}/H2XjfutcqNtgdzYN-sy66g
+Accept: {{contentType}}
+
+### 4. Crear un nuevo país
+POST {{baseUrl}}
+Content-Type: {{contentType}}
+
+{
+  "country": "Shelviville"
+}
+
+### 5. Actualizar un país existente
+PUT {{baseUrl}}/H2XjfutcqNtgdzYN-sy66g
+Content-Type: {{contentType}}
+Accept: {{contentType}}
+
+{
+  "country": "Shelviville"
+}
+
+### 6. Eliminar un país (soft delete)
+DELETE {{baseUrl}}/IcLh9_s6lKDoIeblT9ionA
+Accept: {{contentType}}
+
