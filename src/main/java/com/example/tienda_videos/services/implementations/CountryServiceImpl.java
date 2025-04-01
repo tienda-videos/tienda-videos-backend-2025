@@ -1,6 +1,9 @@
 package com.example.tienda_videos.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +34,7 @@ public class CountryServiceImpl implements CountryService {
     private CryptoService cryptoService;
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "countries", key = "#root.methodName + '_' + T(java.util.Objects).toString(#name, 'null') + '_' + T(java.util.Objects).toString(#page, 'null') + '_' + T(java.util.Objects).toString(#size, 'null')")
     @Override
     public Page<CountryDto> getAllCountries(String name, Integer page, Integer size) {
         Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE);
@@ -44,6 +48,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "country", key = "#id")
     @Override
     public CountryDto getCountryById(String id) {
         Integer idDesencriptado = desencriptarIdProduct(id);
@@ -52,6 +57,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Transactional
+    @CachePut(value = "country", key = "#result.countryId")
     @Override
     public CountryDto createCountry(CountryDto countryDto) {
         CountryEntity country = countryConverter.dtoToEntity(countryDto);
@@ -60,6 +66,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Transactional
+    @CachePut(value = "country", key = "#result.countryId")
     @Override
     public CountryDto updateCountry(String id, CountryDto countryDto) {
         Integer idDesencriptado = desencriptarIdProduct(id);
@@ -70,6 +77,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Transactional
+    @CacheEvict(value = "country", key = "#id")
     @Override
     public void deleteCountry(String id) {
         Integer idDesencriptado = desencriptarIdProduct(id);

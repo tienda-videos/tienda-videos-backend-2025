@@ -3,6 +3,7 @@ Practices used in the project
 General
 1. Implementation of logs
 2. Hide credentials of application.properties
+3. Use cache in project (redis)
 
 DTO Implementation
 1. Use Lombok to Reduce Boilerplate Code
