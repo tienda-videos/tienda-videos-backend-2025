@@ -30,7 +30,7 @@ Service Implementation
 1. Separation of bussiness logic
 2. Transaction Management
 3. Error Handling
-4. Interface driven development
+4. Interface driven development (SOLID)
 
 Converter Implementation
 1. Uses converter pattern (CountryConverter) for clean separation
